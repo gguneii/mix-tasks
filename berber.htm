@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="berber">Bir bərbər bir bərbərə gəl bərabər bir bərbər dükanı açaq demiş</p>
+    <div id="goster"></div>
+    <script>
+        let berber = document.getElementById("berber")
+        let arr = []
+        let soz = 'bər'
+        let sntc = berber.innerText
+       
+        for (let i = 0; i < sntc.length; i++) {
+            arr.push(sntc[i])
+        }
+        let birles= arr.join('')
+        let ind = []
+        for (let i = 0; i < birles.length; i++) {
+            if(birles.slice(i, i + soz.length) === soz){
+                ind.push(i)
+            }
+        }
+        console.log(ind)
+
+    </script>
+</body>
+
+</html>

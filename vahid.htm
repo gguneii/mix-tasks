@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 10vh auto;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            border: 1px solid #333;
+            font: bold 2em Arial
+        }
+
+        #saat {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="saat"></h1>
+    <table id="cdv"></table>
+    <script>
+        let cdv = document.getElementById('cdv')
+        let saat = document.getElementById("saat")
+        let kod = ''
+        let order = 1
+        let arr = []
+        let timer = setInterval(count, 1000)
+        let saniye = 10
+        for (let i = 1; i <= 16; i++) {
+            arr.push(i)
+        }
+        for (let i = 1; i <= 4; i++) {
+            kod += `<tr>`
+            for (let j = 1; j <= 4; j++) {
+                let ind = rand(0, arr.length - 1)
+                kod += `<td onclick='deyis(this)''>${arr[ind]}</td>`
+                arr.splice(ind, 1)
+            }
+
+            kod += `</tr>`
+        }
+        cdv.innerHTML = kod
+
+        function count() {
+            if (saniye) saat.innerHTML = saniye--
+            else {
+                gameOver(false)
+            }
+        }
+        function gameOver(res) {
+            clearInterval(timer)
+            if (res) {
+                alert('AFERIN !!! ')
+            }
+            else {
+                let allTd = document.querySelectorAll('td');
+                // alert("GAME OVER")
+                order = 0
+                for (let i = 0; i < allTd.length; i++) {
+                    allTd[i].style.backgroundColor = 'gray';
+                    allTd[i].innerHTML = 'Game Over';
+                    allTd[i].onclick = null;
+
+                }
+            }
+
+        }
+        function deyis(td) {
+            if (td.innerHTML == order) {
+                td.style.backgroundColor = '#eee'
+                order++
+                if (order > 16) {
+                    gameOver(true)
+                }
+            }
+
+
+        }
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</body>
+
+</html>

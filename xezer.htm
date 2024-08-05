@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #goster {
+            font: 500 6em Arial;
+            padding-top: 200px;
+            padding-left: 100px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="goster"></div>
+
+    <script>
+        let goster = document.getElementById('goster')
+        let ad = ' Guney'
+
+        function show() {
+            for (let i = 1; i < ad.length; i++) {
+                setTimeout(function() {
+                    goster.innerHTML += ad[i];
+                }, i * 1000)
+            }
+        }
+        show()
+    </script>
+</body>
+
+</html>
