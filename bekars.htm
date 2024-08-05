@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #calendar {
+            padding-top: 100px;
+            margin: auto;
+            width: 300px;
+            height: 500px;
+        }
+
+        #up {
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+        .weekDate {
+            display: flex;
+            margin-top: -50px;
+        }
+
+        .months,
+        .numbers,.months-week {
+            text-align: center;
+        }
+        .numbers{
+            font-size: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+         button {
+            background-color: red;
+            cursor: pointer;
+            padding: 15px;
+            outline: none;
+            border: 1px solid red;
+            border-radius: 7px;
+        }
+        .active{
+            background-color: red;
+            color: white;
+            border-radius: 10px;
+        }
+        .numbers span{
+            padding: 15px;
+            text-align: end;
+        }
+        .numbers span:hover{
+            background-color: red;
+            cursor: pointer;
+            color: white;
+            border-radius: 10px;
+        }
+        #month{
+            font: bold 2em Arial;
+        }
+        .months-week{
+            margin-top: -40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calendar">
+        <div id="up">
+            <div class="btn">
+                <button class="fa-solid fa-angle-left"></button>
+            </div>
+            <div class="months-week">
+                <h4 id="month"></h4>
+                <div class="weekDate">
+                </div>
+            </div>
+            <div class="btn">
+                <button class="fa-solid fa-angle-right"></button>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="numbers">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let weekDate = document.querySelector('.weekDate')
+        let monthsWeek = document.querySelector('.months-week')
+        let month = document.getElementById('month')
+        let numbers = document.querySelector('.numbers')
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const today = new Date()
+        const d = new Date(today);
+        function getDaysInMonth(year, month) {
+            return new Date(year, month + 1, 0).getDate(); 
+        }
+        function updateMonth() {
+            let day = d.getDate();
+            let weekDay = d.toLocaleDateString('en-US', { weekday: 'long' });
+            let monthName = months[d.getMonth()];
+            let year = d.getFullYear();
+            month.innerHTML = monthName;
+            weekDate.innerHTML = `<p>${weekDay}, </p> <p> ${day} ${monthName} ${year}</p>`;
+
+
+            let daysInMonth = getDaysInMonth(year, d.getMonth());
+            let daysHTML = '';
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                let className = '';
+                if (i === day && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear()) {
+                    className = 'active';
+                }
+                daysHTML += `<span class="${className}">${i}</span>`;
+            }
+            numbers.innerHTML = daysHTML.trim();
+        }
+        document.querySelector('.fa-angle-left').addEventListener('click', () => {
+            let currentMonth = d.getMonth();
+            if (currentMonth === 0) {
+                d.setMonth(11);
+                d.setFullYear(d.getFullYear() - 1);
+            } else {
+                d.setMonth(currentMonth - 1);
+            }
+            updateMonth()
+        })
+        document.querySelector('.fa-angle-right').addEventListener('click', () => {
+            let currentMonth = d.getMonth();
+            if (currentMonth === 11) {
+                d.setMonth(0); 
+                d.setFullYear(d.getFullYear() + 1); 
+            } else {
+                d.setMonth(currentMonth + 1); 
+            }
+            updateMonth();
+        });
+
+        updateMonth()
+    </script>
+</body>
+
+</html>
