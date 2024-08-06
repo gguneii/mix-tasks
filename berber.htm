@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-    <p id="berber">Bir bərbər bir bərbərə gəl bərabər bir bərbər dükanı açaq demiş</p>
-    <div id="goster"></div>
+    <h3 id="cumle">Bir bərbər bir bərbərə gəl bərabər bir bərbər dükanı açaq demiş
+    </h3>
     <script>
-        let berber = document.getElementById("berber")
-        let arr = []
-        let soz = 'bər'
-        let sntc = berber.innerText
-       
-        for (let i = 0; i < sntc.length; i++) {
-            arr.push(sntc[i])
-        }
-        let birles= arr.join('')
-        let ind = []
-        for (let i = 0; i < birles.length; i++) {
-            if(birles.slice(i, i + soz.length) === soz){
-                ind.push(i)
+        const cumle = document.getElementById('cumle')
+        const sozler = cumle.innerText
+        const soz = 'bər'
+        let arr = [];
+        for(let i = 0; i < sozler.length; i++){
+            if(sozler.substr(i, soz.length) == soz){
+                arr.push(i)
             }
         }
-        console.log(ind)
-
+        console.log(arr);
     </script>
 </body>
-
 </html>
